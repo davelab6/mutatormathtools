@@ -12,3 +12,13 @@ rm -rf "$SCRIPTDIR/out.ufo"
 # patch the nasty output so that FontForge knows the size
 sed -i "s|<string>styleName</string>|<string>styleName</string><key>unitsPerEm</key><integer>2048</integer>|g" out.ufo/fontinfo.plist
 
+mv out.ufo Khula-MutatorMath.ufo;
+
+# example
+metapolator-interpolate.js \
+    `pwd`/fonts/Khula-Light-090x-456.ufo \
+    `pwd`/fonts/Khula-ExtraBold-090x-456.ufo \
+    weight 0.5 \
+    --out Khula-Metapolator.ufo;
+
+xmldiff Khula-MutatorMath.ufo Khula-Metapolator.ufo;
